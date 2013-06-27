@@ -70,7 +70,9 @@ class XML(object) :
         result.append(count)
         result.append(line)
         return result
-
+	#
+	# add_root method: Adds a master root to the xml file for parsing
+	#
     def add_root(self, rfile, wfile) :
         assert type(rfile) is str
         assert type(wfile) is str
@@ -86,13 +88,17 @@ class XML(object) :
         w.write( "</ROOT>")
         w.close()
 
-
+	#
+	# parse_trees function:
+	#
     def parse_trees(root_xml) :
         assert type(root_xml) is str
         maintree = ET.parse(root_xml)
         main_root = maintree.getroot()
         docs = main_root.getchildren()
         return docs
+
+
 
 
 def is_nested_it_2(etree, qtree) :
@@ -133,33 +139,35 @@ def is_nested_it_2(etree, qtree) :
         return nest_cnt
 
     return nest_cnt
+    
+    
+    def xml_search_2(etrees, qtrees) :
+		#assert type(et) is types.ET
+		count = 0
+		linecnt = 0
+		line = []
 
+		try :
+		    for i in etrees.iter() :
+		        linecnt += 1
+		        qt = qtrees.iter()
+		        if qtrees.getroot().tag == i.tag :
 
-def xml_search_2(etrees, qtrees) :
-    #assert type(et) is types.ET
-    count = 0
-    linecnt = 0
-    line = []
+		            etrees._setroot(i)
+		            iq = qt.next()
+		            qtrees._setroot(iq)
+		            nest_cnt = is_nested_it_2(etrees, qtrees)
+		            if nest_cnt > 0 :
+		                count += nest_cnt
+		                while nest_cnt != 0 :
+		                    line += [linecnt]
+		                    nest_cnt -= 1
+		except StopIteration :
+		    pass
 
-    try :
-        for i in etrees.iter() :
-            linecnt += 1
-            qt = qtrees.iter()
-            if qtrees.getroot().tag == i.tag :
-
-                etrees._setroot(i)
-                iq = qt.next()
-                qtrees._setroot(iq)
-                nest_cnt = is_nested_it_2(etrees, qtrees)
-                if nest_cnt > 0 :
-                    count += nest_cnt
-                    while nest_cnt != 0 :
-                        line += [linecnt]
-                        nest_cnt -= 1
-    except StopIteration :
-        pass
-
-    result = []
-    result.append(count)
-    result.append(line)
-    return result
+		result = []
+		result.append(count)
+		result.append(line)
+		return result
+    
+    
