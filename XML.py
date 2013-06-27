@@ -6,10 +6,11 @@ import xml.etree.ElementTree as ET
 class XML(object) :
 
 
-
+	#
+	# XML Constructor: parses the original xml file
+	#
     def __init__(self, xmlfile) :
         """
-
         :param xmlfile:
         """
         self.add_root(xmlfile, 'mainRunXML.in')
@@ -18,20 +19,17 @@ class XML(object) :
         self.root_lst = self.mainroot.getchildren()
         self.etree = ET.parse('mainRunXML.in')
         self.etree_list = []
-
         #self.qtree = qt
 
+	#
+	# is_nested_it
+	#
     def is_nested_it(self, etree, qtree) :
-
-        eroot = etree.getroot()
-        qroot = qtree.getroot()
 
         etreeit = etree.iter()
         qtreeit = qtree.iter()
-
         qtit = qtreeit.next()
-        nest = True
-
+ 
         try :
             for i in etreeit :
 
@@ -43,7 +41,9 @@ class XML(object) :
             return False
 
 
-
+	#
+	# xml_search
+	#
     def xml_search(self, etrees, qtrees) :
         #assert type(et) is types.ET
 
@@ -70,6 +70,8 @@ class XML(object) :
         result.append(count)
         result.append(line)
         return result
+	
+	
 	#
 	# add_root method: Adds a master root to the xml file for parsing
 	#
@@ -99,48 +101,47 @@ class XML(object) :
         return docs
 
 
+	#
+	# is_nested_it_2
+	#
+	def is_nested_it_2(etree, qtree) :
 
+		temp_etree = ET.parse('file3')
+		temp_qt = ET.parse('query.in')
 
-def is_nested_it_2(etree, qtree) :
+		etreeit = etree.iter()
+		qtreeit = qtree.iter()
 
-    temp_etree = ET.parse('file3')
-    temp_qt = ET.parse('query.in')
+		next_qtreeit = qtreeit.next()
+		nest_cnt = 0
 
-    etreeit = etree.iter()
-    qtreeit = qtree.iter()
+		try :
+		    for i in etreeit :
+		        if i.tag == next_qtreeit.tag :
+		            #next_qtreeit = qtreeit.next()
+		            temp_etree._setroot(i)
+		            temp_etreeit = temp_etree.iter()
 
-    next_qtreeit = qtreeit.next()
-    nest_cnt = 0
+		            temp_qtit = temp_qt.iter()
+		            next_temp_qtit = temp_qtit.next()
 
-    try :
-        for i in etreeit :
+		            for i2 in temp_etreeit :
+		                try :
+		                    if i2.tag == next_temp_qtit.tag :
+		                        next_temp_qtit = temp_qtit.next()
+		                except StopIteration :
+		                    nest_cnt += 1
+		                    temp_qtit = temp_qt.iter()
+		                    next_temp_qtit = temp_qtit.next()
+		                    next_temp_qtit = temp_qtit.next()
+		except StopIteration :
+		    return nest_cnt
 
-            if i.tag == next_qtreeit.tag :
-
-                #next_qtreeit = qtreeit.next()
-                temp_etree._setroot(i)
-                temp_etreeit = temp_etree.iter()
-
-                temp_qtit = temp_qt.iter()
-                next_temp_qtit = temp_qtit.next()
-
-                for i2 in temp_etreeit :
-
-                    try :
-                        if i2.tag == next_temp_qtit.tag :
-                            next_temp_qtit = temp_qtit.next()
-                    except StopIteration :
-                        nest_cnt += 1
-                        temp_qtit = temp_qt.iter()
-                        next_temp_qtit = temp_qtit.next()
-                        next_temp_qtit = temp_qtit.next()
-
-    except StopIteration :
-        return nest_cnt
-
-    return nest_cnt
+		return nest_cnt
     
-    
+    #
+    # xml_search_2
+    #
     def xml_search_2(etrees, qtrees) :
 		#assert type(et) is types.ET
 		count = 0
