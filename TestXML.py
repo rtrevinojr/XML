@@ -131,19 +131,27 @@ class TestXML(unittest.TestCase) :
 	#
 	# test_add_root()
 	#
+
 	def test_add_root(self) :
-		self.xml_obj.add_root('RunXML.in', 'RunXML.in')
-		master_tree = ET.parse('RunXML.in')
+		self.xml_obj.add_root('RunXML.in', 'testRunXML.in')
+		master_tree = ET.parse('testRunXML.in')
 		mroot = master_tree.getroot()
 		self.assert_(mroot.tag == "ROOT")
 		
 	def test_add_root_2(self) :
-		self.xml_obj.add_root('RunXML.in', 'RunXML.in')
-		master_tree = ET.parse('RunXML.in')
+		self.xml_obj.add_root(self.xml, 'testRunXML.in')
+		master_tree = ET.parse('testRunXML.in')
+		mroot = master_tree.getroot()
+		self.assert_(mroot.tag == "ROOT")
+		
+	def test_add_root_3(self) :
+		self.xml_obj.add_root(self.query, 'testRunXML.in')
+		master_tree = ET.parse('testRunXML.in')
 		mroot = master_tree.getroot()
 		self.assert_(mroot.tag == "ROOT")
 		
 		
+	
 		
 		
 		
@@ -155,7 +163,7 @@ class TestXML(unittest.TestCase) :
 #
 # main
 #
-	print xml
+# print xml
 
 print "TestXML.py"
 unittest.main()

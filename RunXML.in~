@@ -1,14 +1,14 @@
 <THU>
 	<Team>
-		<ACRush></ACRush>
-		<Jelly></Jelly>
-		<Cooly></Cooly>
+		<ACRush> </ACRush>
+		<Jelly> </Jelly>
+		<Cooly> </Cooly>
 	</Team>
 	<JiaJia>
 		<Team>
-			<Ahyangyi></Ahyangyi>
-			<Dragon></Dragon>
-			<Cooly><Amber></Amber></Cooly>
+			<Ahyangyi> </Ahyangyi>
+			<Dragon> </Dragon>
+			<Cooly> <Amber> </Amber> </Cooly>
 		</Team>
 	</JiaJia>
 </THU>
