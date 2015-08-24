@@ -1,7 +1,4 @@
-<foo>
-  <bar></bar>
-</foo>
-<baz />
+<ROOT> 
 
 <xylem>
   <wetlands>
@@ -3035,3 +3032,4 @@
 <zinc><consistent><bone-meal><valiant><dormancy><deliberate><ruthless /></deliberate></dormancy></valiant></bone-meal></consistent></zinc>
 
 
+</ROOT>

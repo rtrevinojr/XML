@@ -9,6 +9,7 @@ class XML(object) :
 
     def __init__(self, xmlfile) :
 
+        #assert type(xmlfile) is str
         self.add_root(xmlfile, 'masterRunXML.in')
         self.maintree = ET.parse('masterRunXML.in')
         self.mainroot = self.maintree.getroot()

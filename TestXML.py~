@@ -46,7 +46,6 @@ class TestXML(unittest.TestCase) :
 	
 	# global query constant
 	query = " <Team> <Cooly> </Cooly> </Team> "
-	query1 = " <JiaJia> <Team> </Team> </JiaJia> "
 	query2 = " <Team> </Team> "
 	query3 = " <Team> <Cooly> <Amber> </Amber> </Cooly> </Team> "
 	
@@ -61,7 +60,7 @@ class TestXML(unittest.TestCase) :
 		fxml = StringIO.StringIO(self.xml)
 		etree = ET.parse(fxml)
 		eroot = etree.getroot()
-		fquery = StringIO.StringIO(self.query1)
+		fquery = StringIO.StringIO(self.query)
 		qtree = ET.parse(fquery)
 		#
 		result = self.xml_obj.is_nested(etree, qtree)
